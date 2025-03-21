@@ -34,6 +34,7 @@ class Builder
     public $limit  = null;
     public $offset = null;
     public $order  = null;
+    public $cls    = null;
 
     /**
      * Convert to string
