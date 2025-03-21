@@ -77,12 +77,12 @@ class Connection
      */
     public static function selectEnvironment($env = null) 
     {
-        if (strlen($env) < 1) {
+        if ($env === null || strlen($env) < 1) {
             $getenv = self::_getEnvironment();
-            if (strlen($getenv) > 0) {
-                $env = $getenv;
-            } else {
+            if ($getenv === false || strlen($getenv) < 1) {
                 $env = "development";
+            } else {
+                $env = $getenv;
             }
         }
         return $env;
