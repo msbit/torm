@@ -49,6 +49,8 @@ class Collection implements \Iterator
         $this->_vals    = $vals;
         $this->_cls     = $cls;
         $this->_count   = 0;
+
+        $this->next();
     }
 
     /**
@@ -82,9 +84,6 @@ class Collection implements \Iterator
      */
     public function current(): mixed
     {
-        if ($this->_curval == null) {
-            return $this->next();
-        }
         return new $this->_cls($this->_curval);
     }
 
@@ -101,7 +100,7 @@ class Collection implements \Iterator
      */
     public function valid(): bool
     {
-        return $this->current() != null && $this->_curval != null;
+        return $this->_curval != null;
     }
 
     /**
@@ -324,12 +323,13 @@ class Collection implements \Iterator
         $ar  = array();
         $cnt = 0;
 
-        while ($data=$this->next()) {
-            array_push($ar, $data);
+        while ($this->valid()) {
+            array_push($ar, $this->current());
             $cnt ++;
             if ($limit != -1 && $cnt >= $limit) {
                 break;
             }
+            $this->next();
         }
         return $ar;
     }
@@ -353,21 +353,17 @@ class Collection implements \Iterator
      *
      * Example:
      * echo Person::all()->next();
-     *
-     * @return mixed object
      */
-    public function next()
+    public function next(): void
     {
         $cls  = $this->_cls;
         $data = $this->_getCurrentData();
 
         if (!$data) {
             $this->_curval = null;
-            return $this->_curval;
         } else {
             ++$this->_count;
             $this->_curval = $data;
-            return new $this->_cls($this->_curval);
         }
     }
 

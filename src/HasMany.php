@@ -164,7 +164,7 @@ trait HasMany
         } else {
             $data = $klass::where(array($foreign => $value));
             $this->_has_many_ids = array();
-            while ($row=$data->next()) {
+            foreach ($data as $row) {
                 array_push($this->_has_many_ids, $row->get($klasspk));
             }
         }
