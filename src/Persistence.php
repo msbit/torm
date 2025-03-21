@@ -240,7 +240,7 @@ trait Persistence
                 continue;
             }
 
-            if (strlen(trim($value)) < 1) {
+            if ($value === null || strlen(trim($value)) < 1) {
                 $value = null;
             }
 
