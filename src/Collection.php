@@ -79,10 +79,8 @@ class Collection implements \Iterator
 
     /**
      * Return current value
-     *
-     * @return mixed value
      */
-    public function current()
+    public function current(): mixed
     {
         if ($this->_curval == null) {
             return $this->next();
@@ -92,30 +90,24 @@ class Collection implements \Iterator
 
     /**
      * Return current key
-     *
-     * @return mixed key
      */
-    public function key()
+    public function key(): mixed
     {
         return $this->_count;
     }
 
     /**
      * Return if its valid
-     *
-     * @return boolean valid
      */
-    public function valid()
+    public function valid(): bool
     {
         return $this->current() != null && $this->_curval != null;
     }
 
     /**
      * Rewind collection
-     *
-     * @return null
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->_count = 0;
     }
