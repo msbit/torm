@@ -7,7 +7,9 @@
       }
 
       public function strip_invalid() {
-          $this->email = str_replace("#","",$this->email);
+          if ($this->email !== null) {
+              $this->email = str_replace("#","",$this->email);
+          }
           return true;
       }
 

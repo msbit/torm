@@ -149,7 +149,7 @@ trait Callbacks
      *
      * @return null
      */
-    private function _addCallback($cls, $callback, $func) 
+    private static function _addCallback($cls, $callback, $func)
     {
         self::_initiateCallbacks($cls);
         array_push(self::$_callbacks[$cls][$callback], $func);

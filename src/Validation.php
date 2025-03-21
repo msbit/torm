@@ -54,6 +54,11 @@ class Validation
         if (!$validation_value) {
             return true;
         }
+
+        if ($attr_value === null) {
+            return false;
+        }
+
         return strlen(trim($attr_value)) > 0;
     }
 
@@ -79,6 +84,10 @@ class Validation
         // check if allow null values
         if (!is_null($options) && array_key_exists("allow_null", $options) && is_null($attr_value)) {
             return true;
+        }
+
+        if ($attr_value === null) {
+            return 0;
         }
 
         // check format using regex
@@ -125,6 +134,10 @@ class Validation
      */
     public static function numericality($cls, $id, $attr, $attr_value, $validation_value, $options)
     {
+        if ($attr_value === null) {
+            return 0;
+        }
+
         return preg_match("/^[-\.0-9]+$/", trim($attr_value));
     }
 }
